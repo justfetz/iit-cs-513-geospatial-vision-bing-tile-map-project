@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+
+<head>
+
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href= "{% static 'css/myStyle.css' %}" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+
+
+	<script>
+		function myFunction() {
+			document.getElementById("demo").innerHTML = "Hey you clicked me!";
+			document.getElementById("location").innerHTML = "succcess";
+		}
+	</script>
+
+	<style type="text/css">
+	html { height: 100% }
+	body { height: 100%; margin: 0; padding: 0 }
+	#map_canvas { height: 90%; width: 90% }
+</style>
+
+<script type='text/javascript' 
+src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' 
+async defer></script>
+
+<script>
+
+	// function primaryInfo(lat, long, z) {
+
+
+	// 	var EarthRadius = 6378137;
+	// 	var lat = document.getElementById("latitude").value;
+	// 	var long = document.getElementById("longitude").value;
+	// 	var z = document.getElementById("zoom").value;
+		
+	// 	var groundRes = Math.cos(lat *Math.PI/180) * 2 * Math.PI * EarthRadius /mapSize;
+
+	// 	var x = (long + 180) / 360; 
+ //        var sinLatitude = Math.Sin(lat * Math.PI / 180);
+ //        var y = 0.5 - Math.Log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI);
+
+ //        var pixelX = (x * mapSize + 0.5, 0, mapSize - 1);
+ //        var pixelY = (y * mapSize + 0.5, 0, mapSize - 1);
+
+
+ //        alert("Your map size is: " +  mapSize);
+	// 	alert("Ground Resolution is: " + groundRes);
+	// 	alert("pixelx = " + pixelX + "and pixelY = " + pixelY);
+	// 	return(pixelX, pixelY);
+
+	// }
+
+
+	function mercator(lat, long, lowlat, lowlong, z) {
+
+		var EarthRadius = 6378137;
+		var lat = document.getElementById("latitude").value;
+		var long = document.getElementById("longitude").value;
+		var lowerLatitude = document.getElementById("lowerlat").value;
+		var lowerLongitude = document.getElementById("lowerlong").value;
+		var z = document.getElementById("zoom").value;
+		var latRadius = lat * Math.PI / 180;
+		var mapSize = 256 << z;
+ 		var groundRes = Math.cos(lat *Math.PI/180) * 2 * Math.PI * EarthRadius /mapSize;
+
+
+ 		var x = (long + 180) / 360; 
+        var sinLatitude = Math.sin(lat * Math.PI / 180);
+        var y = 0.5 - Math.log((1 + sinLatitude) / (1 - sinLatitude)) / (4 * Math.PI);
+
+
+        var pixelX = (x * mapSize + 0.5, 0, mapSize - 1);
+        var pixelY = (y * mapSize + 0.5, 0, mapSize - 1);
+
+
+		n = Math.pow(2, z);
+		xTile = n * ((long + 180) / 360);
+		yTile = n * (1-(Math.log(Math.tan(latRadius) + 1/Math.cos(latRadius)) /Math.PI)) / 2;
+
+		
+		alert("pixelX= "  + pixelX + " and pixelY= " + pixelY);
+		alert("Calculated Level " + n);
+		alert("Map Size = " + mapSize);
+		alert("Ground Resolution = " + groundRes);
+		alert("Your xTile Value is: " + xTile);
+		alert("Your yTile Value is: " + yTile);
+		alert("Please Click Below to retrieve your quadkey parameter.");
+		return(xTile, yTile);
+
+	}
+
+
+	function tileXYToQuadKey(xTile, yTile, z) {
+		var quadKey = "";
+		for (var i = z; i > 0; i--) {
+			var digit = "0",
+			mask = 1 << (i - 1);
+			if ((xTile & mask) != 0) {
+				digit++;
+			}
+
+			if ((yTile & mask) != 0) {
+				digit ++;
+				digit ++ 
+			}
+			quadKey += digit;
+} // for i return quadKey;
+
+alert("Please visit http://h0.ortho.tiles.virtualearth.net/tiles/h" + quadKey + ".jpeg?g=131 for location");
+}
+			
+
+
+//note to link for copy
+//strText= 'http://h0.ortho.tiles.virtualearth.net/tiles/h023131022213211200.jpeg?g=131'
+
+
+
+
+</script>
+
+<title>Geo Data</title>
+</head>
+
+
+
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Geospatial Vision</a>
+
+			</div>
+		</div>   
+
+	</nav>
+
+
+	<h1>GeoTiler Application</h1>
+	<h2>Get Started with Your Coordinates Below</h2>
+
+
+	<div class="container">
+		<ul>
+			<li><h6><em>A project by Jason Fetzer for CS-513, Illinois Tech</em></h6></li>
+			<li><h6>***The lat and long coordinates will return a Bing Maps quadkey element according to best available image level.</h6></li>
+			<li><h6>For a brief summary and links to the documenation, go to /about in the Navigation Bar.</h6></li>
+			<div>
+				<h4><a href = http://bing.com/maps/default.aspx?cp=43.901683~-69.522416&lvl=12&style=a>Bing Maps Aerial View Link</h4>
+				</a>
+
+			</ul>
+		</div>
+	</div>
+	<div class="container" id = "instructions">
+		<ol>
+			<li>Enter all of the values in the lat/long coordinate boxes. (You can click anywhere on the map to get lat/long coordinates as well.)</li>
+			<li>Click the Green Button.</li>
+			<li>Wait for the alerts to complete, and click the underlined instruction "QuadKey"</li>
+			<li>You will have to copy and paste the URL to retrieve your tile.</li>
+		</ol>
+	</div>
+
+
+	<!--<p id="demo" onclick="myFunction()">Watch here for innerHTML responses!</p>-->
+	
+
+
+
+
+	<!--<script type='text/javascript'>-->
+
+		<script type='text/javascript'
+		src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' 
+		async defer></script>
+
+
+		<script type='text/javascript'>
+			function GetMap() {
+
+				latEl = document.getElementById('latitude');
+				lngEl = document.getElementById('longitude');
+				lowlat = document.getElementById('lowlat');
+				lowlong = document.getElementById('lowlong');
+				button = document.getElementById('setMarker2');
+			//map.addDomListener(button, 'click', setMarker2);
+
+			//Microsoft.Maps.Events.addDomListener(button, 'click', setMarker2);
+
+
+
+			var map = new Microsoft.Maps.Map('#myMap', {
+				credentials: 'AsrFfgcCCpdLGoZE6oDTGmkWSmT46NmphmGI2TvEgRiA-q4eMTzlQ9bHGxg3ZKjl',
+				center: new Microsoft.Maps.Location(41.838086, -87.627336)
+			});
+
+			var center = map.getCenter();
+
+        //Create custom Pushpin
+        var pin = new Microsoft.Maps.Pushpin(center, {
+        	title: 'IIT',
+        	subTitle: 'Pritzker',
+        	text: '1'
+        });
+
+        map.setView({
+        	mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+        	center: new Microsoft.Maps.Location(41.838086, -87.627336),
+        	zoom: 12
+
+        });
+
+        //Add the pushpin to the map
+
+        map.entities.push(pin);
+         //Microsoft.Maps.Events.addHandler(button, 'click', setMarker2 );
+         Microsoft.Maps.Events.addHandler(map, 'click',getLatlng ); 
+     }
+     function setMarker2() {
+     	var latitude = latEl.value();
+     	var longitude = lngEl.value();
+     	var lowerlat = lowlat.value();
+     	var lowerlong = lowlong.value();
+
+     	if (latitude == '' || longitude == '') {
+     		console.log('lat or lng not defined');
+     		return;
+     	}
+
+     	var positionOne = new Microsoft.Maps.Location(parseFloat(latitude).latitude,
+     		parseFloat(longitude).longitude);
+     	var positionTwo = new Microsoft.Maps.Location(parseFloat(lowerlat).latitude,
+     		parseFloat(lowerlong).longitude);
+
+     	var markerOne = new Microsoft.Maps.Pushpin(positionOne, {
+     		title: 'Upper',
+     		subTitle: 'Left',
+     		text: '1'
+
+     	});
+
+
+     	var markerTwo = new Microsoft.Maps.Pushpin(positionTwo,{
+     		title: 'Lower',
+     		text: '2'
+
+     	});
+
+
+								//map.setCenter(positionOne);
+								map.entities.push(markerOne);
+								map.entities.push(markerTwo);
+								alert("Done");
+
+							}
+
+							function getLatlng(e) { 
+								if (e.targetType == "map") {
+									var point = new Microsoft.Maps.Point(e.getX(), e.getY());
+									var locTemp = e.target.tryPixelToLocation(point);
+									var location = new Microsoft.Maps.Location(locTemp.latitude, locTemp.longitude);
+									alert(locTemp.latitude+"&"+locTemp.longitude);
+
+
+									var pin = new Microsoft.Maps.Pushpin(location, {'draggable': false});
+
+									map.entities.push(pin);
+									alert("Done");
+
+								}              
+							}
+						</script>
+
+						<div>
+							<!--LatLng    <input type='text' id='txtLatLng' value='46.50 : 13.50' />-->
+							Latitude: <input type='text' id='latitude' value='' />
+							Longitude: <input type='text' id='longitude' value='' />
+							LowerLat:	<input type='text' id='lowerlat' value='' />
+							LowerLong:	<input type='text' id='lowerlong' value='' />
+							Zoom: <input type='text' id='zoom' value=''/>
+
+
+
+							<!--<input type='button' class='btn btn-primary' id='prelim' value='Get Prelim Info' onclick="primaryInfo()" />-->
+							<input type='button' class='btn btn-success' id='setMarker2' value='Get Answer' onclick="mercator()" />
+							<!--<div id='#myMap'></div>-->
+
+							<p id="demo" onclick="tileXYToQuadKey(xTile, yTile, document.getElementById('zoom').value)"><b><u>Click to Get QuadKey (after the alerts!)</u></b></p>
+							<script>
+								document.getElementById("setMarker2").addEventListener("click", function(){
+									setMarker2;
+
+								});
+
+//document.getElementById("setMarker2").onclick = mercator;
+
+</script>
+</div>
+
+
+
+<body>
+	<div id="myMap" style="position:relative;width:600px;height:400px;"></div>
+	<!--<div id="map_canvas" style="position:relative;width:600px;height:400px;"></div>-->
+</body>
+
+
+</body>
+</html>

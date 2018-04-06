@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Map Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<h1>GeoSpatial Data</h1>
+
+<div>
+     <iframe width="750" height="600" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp=41.770653~-87.750731&lvl=16&typ=d&sty=r&src=SHELL&FORM=MBEDV8" scrolling="no">
+     </iframe>
+     <div style="white-space: nowrap; text-align: center; width: 700px; padding: 6px 0;">
+        <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp=41.770653~-87.750731&amp;sty=r&amp;lvl=16&amp;FORM=MBEDLD">View Larger Map</a>
+            &nbsp; | &nbsp;
+            <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp=41.770653~-87.750731&amp;sty=r&amp;lvl=16&amp;rtp=~pos.41.770653_-87.750731____&amp;FORM=MBEDLD">Get Directions</a>
+    </div>
+</div>
+
+
+
+<div class="container">
+  <h2><b>Geospatial Coordinates to Tile</b></h2>
+  <form action="">
+    <div class="form-group">
+      <label for="email">Upper Left Latitude</label>
+      <input type="email" class="form-control" id="" placeholder="Upper Latitude" name="upperLat">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Upper Left Longitude</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Upper Longitude" name="upperLong">
+    </div>
+  <div class="form-group">
+      <label for="pwd">Lower Right Latitude</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Lower Latitude" name="lowerLat">
+    </div>
+     <div class="form-group">
+      <label for="pwd">Lower Right Longitude</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Lower Longitude" name="lowerLong">
+    </div>
+    <button type="submit" class="btn btn-default">Display Coordinates</button>
+  </form>
+</div>
+
+<div class="container">
+    {{ form.as_p }}
+</div>
+ 
+ 
+
+
+
+     <!-- <p>A simple embedded map.</p>
+      <iframe width="400" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+         src="http://dev.virtualearth.net/embeddedMap/v1/ajax/aerial?zoomLevel=10&center=47.5_-122.5&pushpins=47.5_-122.5"/>
+ 
+
+ <div>
+     <iframe width="500" height="400" frameborder="0" src="https://www.bing.com/maps/embed?h=400&w=500&cp=39.652708028384424~-88.42758750000002&lvl=4&typ=d&sty=h&src=SHELL&FORM=MBEDV8" scrolling="no">
+     </iframe>
+     <div style="white-space: nowrap; text-align: center; width: 500px; padding: 6px 0;">
+        <a id="largeMapLink" target="_blank" href="https://www.bing.com/maps?cp=39.652708028384424~-88.42758750000002&amp;sty=h&amp;lvl=4&amp;FORM=MBEDLD">View Larger Map</a>
+            &nbsp; | &nbsp;
+            <a id="dirMapLink" target="_blank" href="https://www.bing.com/maps/directions?cp=39.652708028384424~-88.42758750000002&amp;sty=h&amp;lvl=4&amp;rtp=~pos.39.652708028384424_-88.42758750000002____&amp;FORM=MBEDLD">Get Directions</a>
+    </div>
+</div>
+
+</body> -->
+</html>

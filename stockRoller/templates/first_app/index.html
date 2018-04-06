@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Stock Roller</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href= "{% static 'css/myStyle.css' %}" />
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+
+
+</head>
+<body>
+
+
+<h1>Data Image</h1>
+<h2>Record Return</h2>
+
+<div class = "djangtwo">
+	{% if access_records %}
+	<table>
+		<thread>
+			<th>Stock Roller</th>
+			<th>Date Accessed</th>
+
+		</thread>
+	{% for acc in access_records %}
+	<tr>
+		<td>{{ acc.name }}</td>
+		<td>{{ acc.date}}</td>
+	</tr>
+	{% endfor %}
+
+	</table>
+	{% else %}
+
+	<p>NONE FOUND</p>
+
+	{% endif %}
+
+
+	
+</body>
+</html>
+

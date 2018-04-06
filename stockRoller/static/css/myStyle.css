@@ -1,0 +1,87 @@
+h1 {
+	color: blue;
+	font-size: 28px;
+	font-family: 'Lobster', cursive;
+}
+
+h2 {
+	color: red;
+	font-family: monospace;
+}
+p {
+	font: monospace;
+
+}
+
+table, th, td {
+	border: 2px solid black;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #000;  
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active >   
+ a:hover, .navbar-default .navbar-nav > .active > a:focus {
+color: white; 
+background-color: #030033;
+align-items: right;
+}
+
+  .navbar-default {
+    background-color: #0f006f;
+    border-color: #030033;
+}
+
+  .split {
+  height: 100%;
+  width: 50%;
+ 
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.li {
+	display: inline;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: gray;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: gray;
+}
+.mover {
+	float:left;
+}
+.mover2 {
+	float: right;
+}
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.container {
+  display: inline-flex; /* or inline-flex */
+}
+
+  .navbar-default .navbar-nav > li > a {
+   color: white; /*Change active text color here*/
+    }
