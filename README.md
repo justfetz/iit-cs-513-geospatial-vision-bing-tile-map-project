@@ -1,4 +1,4 @@
-# CS-513: Geospatial Vision - Bing Maps Tile System Project
+# CS-513: Geospatial Vision - Bing Maps Tile System Project  
 
 ## Project Description
 This project is part of the CS-513 Geospatial Vision course at Illinois Institute of Technology. The project demonstrates the use of the Bing Maps Tile System, a system used to render map tiles for various zoom levels and locations. The project involves visualizing geospatial data using the Bing Maps Tile System, manipulating tile coordinates, and integrating various geospatial data sources.
@@ -13,14 +13,8 @@ This project is part of the CS-513 Geospatial Vision course at Illinois Institut
 - Integrated Development Environment (IDE) such as IntelliJ IDEA or Eclipse
 - Bing Maps API key
 
-## Installation
+## Installation (Incomplete)
 
-1. **Clone the repository:**
-    ```sh
-    git clone https://github.com/yourusername/iit-cs-513-geospatial-vision-bing-tile-map-project
-.git
-    cd bing-maps-tile-system
-    ```
 
 2. **Open the project in your IDE:**
     - Open your preferred IDE and import the cloned project.
@@ -45,7 +39,7 @@ This project is part of the CS-513 Geospatial Vision course at Illinois Institut
 
 ## Example
 
-### Code Example
+### Code Example in Java
 ```java
 public class BingMapsTileSystem {
 
@@ -83,4 +77,39 @@ public class BingMapsTileSystem {
         return new Point(px / TILE_SIZE, py / TILE_SIZE);
     }
 }
+```
 
+### Code Example in python
+
+```python
+import math
+
+TILE_SIZE = 256
+EARTH_RADIUS = 6378137
+INITIAL_RESOLUTION = 2 * math.pi * EARTH_RADIUS / TILE_SIZE
+ORIGIN_SHIFT = 2 * math.pi * EARTH_RADIUS / 2.0
+
+def lat_lon_to_tile_xy(lat, lon, zoom):
+    mx, my = lat_lon_to_meters(lat, lon)
+    return meters_to_tile_xy(mx, my, zoom)
+
+def lat_lon_to_meters(lat, lon):
+    mx = lon * ORIGIN_SHIFT / 180.0
+    my = math.log(math.tan((90 + lat) * math.pi / 360.0)) / (math.pi / 180.0)
+    my = my * ORIGIN_SHIFT / 180.0
+    return mx, my
+
+def meters_to_tile_xy(mx, my, zoom):
+    res = INITIAL_RESOLUTION / (1 << zoom)
+    px = int((mx + ORIGIN_SHIFT) / res)
+    py = int((my + ORIGIN_SHIFT) / res)
+    return px // TILE_SIZE, py // TILE_SIZE
+
+# Example usage
+lat = 41.881832
+lon = -87.623177
+zoom = 15
+
+tile_x, tile_y = lat_lon_to_tile_xy(lat, lon, zoom)
+print(f"Tile X: {tile_x}, Tile Y: {tile_y}")
+```
